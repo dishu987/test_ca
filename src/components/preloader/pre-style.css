@@ -1,0 +1,139 @@
+.main-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.586);
+    user-select: none;
+    z-index: 999;
+    user-zoom: none;
+    flex-direction: column;
+}
+
+.main-loader>.loader-text {
+    color: white;
+    padding: 1.5rem 2rem;
+}
+
+.main-loader>.loader-text>h1 {
+    font-family: cursive;
+    font-size: 1.3rem;
+    position: relative;
+}
+
+.main-loader>.loader-text>h1::first-letter {
+    color: red !important;
+}
+
+.main-loader>.loader-text>h1::after {
+    font-family: cursive;
+    font-size: 1.3rem;
+    content: "...";
+    position: absolute;
+    animation: loader-dotes 1s ease infinite;
+}
+
+@keyframes loader-dotes {
+    0% {
+        content: "";
+    }
+    20% {
+        content: ".";
+    }
+    70% {
+        content: "..";
+    }
+    100% {
+        content: "...";
+    }
+}
+
+.main-loader>.spinner {
+    width: 44.8px;
+    height: 44.8px;
+    animation: spinner-y0fdc1 2s infinite ease;
+    transform-style: preserve-3d;
+}
+
+.main-loader>.spinner>div {
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    border: 2.2px solid white;
+}
+
+.main-loader>.spinner div:nth-of-type(1) {
+    transform: translateZ(-22.4px) rotateY(180deg);
+}
+
+.main-loader>.spinner div:nth-of-type(2) {
+    transform: rotateY(-270deg) translateX(50%);
+    transform-origin: top right;
+}
+
+.main-loader>.spinner div:nth-of-type(3) {
+    transform: rotateY(270deg) translateX(-50%);
+    transform-origin: center left;
+}
+
+.main-loader>.spinner div:nth-of-type(4) {
+    transform: rotateX(90deg) translateY(-50%);
+    transform-origin: top center;
+}
+
+.main-loader>.spinner div:nth-of-type(5) {
+    transform: rotateX(-90deg) translateY(50%);
+    transform-origin: bottom center;
+}
+
+.main-loader>.spinner div:nth-of-type(6) {
+    transform: translateZ(22.4px);
+}
+
+@keyframes spinner-y0fdc1 {
+    0% {
+        transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+    }
+    50% {
+        transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+    }
+    100% {
+        transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+    }
+}
+
+
+/* --------- */
+
+
+/*  Preloader */
+
+
+/* --------- */
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    background-color: #0c0513;
+    background-image: url(../../Assets/pre.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#preloader-none {
+    opacity: 0;
+}
+
+#no-scroll {
+    overflow: hidden;
+    height: 100vh;
+}
