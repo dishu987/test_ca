@@ -1,0 +1,91 @@
+.ca-guide-main {
+  height: 100%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 20px 10px;
+  user-select: none;
+  font-family: "Mulish";
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 144, 240);
+  transform: 0.3s ease;
+}
+
+a:hover {
+  color: rgb(176, 2, 176);
+}
+
+.ca-guide-main > ul > li {
+  list-style: none;
+}
+
+.ca-guide-main > ul > li > .title {
+  color: violet;
+  font-size: 1.5rem;
+  margin: 10px 0;
+  font-weight: 600;
+  position: relative;
+}
+
+.ca-guide-main > ul > li > .title::before {
+  position: absolute;
+  content: "";
+  background-color: violet;
+  bottom: 0px;
+  left: 0;
+  width: 5%;
+  height: 2px;
+  transition: 0.5s ease-in-out;
+}
+
+.ca-guide-main > ul > li > .title:hover::before {
+  width: 8%;
+}
+
+.ca-guide-main > ul > li > .title_1 {
+  color: rgb(238, 130, 130);
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.ca-guide-main > ul > li > ul > li {
+  list-style: decimal;
+  color: rgb(146, 248, 255);
+}
+
+.ca-guide-main > ul > li > ul > li > ul > li {
+  list-style: disc;
+  color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 799px) {
+  .ca-guide-main {
+    justify-content: center;
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+  .ca-guide-main > ul > li > .title {
+    font-size: 1.3rem;
+  }
+  .ca-guide-main > ul > li > .title::before {
+    position: absolute;
+    content: "";
+    background-color: violet;
+    bottom: 0px;
+    left: 0;
+    width: 5%;
+    height: 2px;
+    transition: 0.5s ease-in-out;
+  }
+  .ca-guide-main > ul > li > .title:hover::before {
+    width: 8%;
+  }
+  .ca-guide-main > ul > li > .title_1 {
+    font-size: 0.8rem;
+  }
+}

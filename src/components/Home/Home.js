@@ -1,67 +1,50 @@
-import React from "react";
-import { Container, Row, Col, NavLink } from "react-bootstrap";
-import homeLogo from "../../Assets/home-main.svg";
-import Particle from "../Particle";
+import React, { useEffect, useState } from "react";
+import Home3 from "./Home3";
 import Home2 from "./Home2";
 import "./home-style.css";
 import Tilt from "react-parallax-tilt";
+import { Link } from "react-router-dom";
+import Testimonials from "../Testimonials/testimonial";
+import About from "./about";
 
-function Home() {
+function Home(props) {
   return (
     <section>
-      {/* <Container fluid className="home-section" id="home">
-        <Particle />
-        <Container className="home-content">
-          <Row>
-            <Col md={7} className="home-header">
-              <h1 className="heading-name" style={{ textAlign: "left" }}>
-                ZEITGEIST 22 '{" "}
-                <p style={{ padding: 30 }}>
-                  {" "}
-                  <strong className="main-name">
-                    {" "}
-                    CAMPUS AMBASSADOR PROGRAM{" "}
-                  </strong>
-                </p>
-              </h1>
-            </Col>
-            <Col md={5} style={{ paddingBottom: 20 }}>
-              <img
-                src={homeLogo}
-                alt="home pic"
-                className="img-fluid"
-                style={{ maxHeight: "450px" }}
-              />{" "}
-            </Col>{" "}
-          </Row>{" "}
-        </Container>{" "}
-      </Container>{" "} */}
       <div className="home-container">
         <div className="home-content">
           <div className="header">
             <h1>
-              <Tilt> ZEITGEIST 22 </Tilt>
+              <Tilt>Zeitgeist"23</Tilt>
             </h1>
           </div>
           <div className="subheader">
-            <h1> CAMPUS AMBASSADOR PROGRAM</h1>
+            <h1> Campus Ambassador Program</h1>
           </div>
-          <div className="registration-btn">
-            <Tilt>
-              <a href={""}>Register</a>
-            </Tilt>
-          </div>
-        </div>
-        <div className="home-logo">
-          <img
-            src={homeLogo}
-            alt="home pic"
-            className="img-fluid"
-            style={{ maxHeight: "450px" }}
-          />{" "}
+          {(() => {
+            if (!props.email) {
+              return (
+                <>
+                  <div className="registration-btn">
+                    <Link to={"/signup"}>Register</Link>
+                  </div>
+                </>
+              );
+            } else {
+              return (
+                <>
+                  <div className="registration-btn">
+                    <Link to={"/profile"}>Profile</Link>
+                  </div>
+                </>
+              );
+            }
+          })()}
         </div>
       </div>
+      <About />
       <Home2 />
+      <Home3 />
+      <Testimonials />
     </section>
   );
 }

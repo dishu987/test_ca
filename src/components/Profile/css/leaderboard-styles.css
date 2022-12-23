@@ -1,0 +1,291 @@
+.leaderboard-main {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: auto;
+    flex-direction: column;
+    font-family: "Roboto";
+    font-weight: 100;
+    animation: myAnm-leaderboard 1s ease 1 both;
+}
+
+@keyframes myAnm-leaderboard {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.leaderboard-main>.leaderboard-leaders {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 95%;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card {
+    width: 200px;
+    margin-top: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(29px);
+    backdrop-filter: blur(29px);
+    border: 1px solid rgba(114, 0, 114, 0.456);
+    color: rgb(247, 247, 247);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    position: relative;
+    transition: 0.5s ease-in-out;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card:hover {
+    background: rgba(255, 255, 255, 0.115);
+    border: 1px solid violet;
+    cursor: pointer;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-second,
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first>.leaders-card-details {
+    margin-right: 10px;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first>.leaders-card-details>.leaders-card-details-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-right: 10px;
+    color: violet;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100px;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first>.leaders-card-details>.leaders-card-details-college {
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100px;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first>.leaders-card-badge>img {
+    max-width: 50px;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-second {
+    padding: 10px 0;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-second>.points {
+    background-color: violet;
+    border-radius: 10px;
+    padding: 5px;
+    color: #000;
+    width: 90px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-second>.referals {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 5px;
+    color: #000;
+    max-width: 100px;
+    font-weight: 600;
+}
+
+.leaderboard-main>.leaders-list {
+    width: 95%;
+    overflow: auto;
+    margin: 10px;
+    height: 300px;
+    border: 0.1px solid rgba(255, 255, 255, 0.267);
+    border-radius: 10px;
+}
+
+.leaderboard-main>.leaders-list>table {
+    width: 100%;
+    overflow: auto;
+    transition: 0.2s ease;
+}
+
+.leaderboard-main>.leaders-list>table:hover {
+    background-color: rgba(5, 5, 5, 0.086);
+}
+
+.leaderboard-main>.leaders-list>table>thead {
+    width: 100%;
+    color: white;
+    border-radius: 10px;
+    background-color: rgb(96, 0, 96);
+    position: sticky;
+    top: 0;
+}
+
+.leaderboard-main>.leaders-list>table>thead>tr>th {
+    padding: 10px;
+}
+
+.leaderboard-main>.leaders-list>table>thead>tr>th:first-child {
+    width: 100px;
+}
+
+.leaderboard-main>.leaders-list>table>tbody {
+    width: 100%;
+    color: white;
+}
+
+.leaderboard-main>.leaders-list>table>tbody>tr>td {
+    border: 0.1px solid rgba(255, 255, 255, 0.267);
+    padding: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+    .leaderboard-main {
+        height: 100%;
+        width: auto;
+        position: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+        flex-direction: column;
+        font-family: "Roboto";
+        font-weight: 100;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .leaderboard-main>.leaderboard-leaders {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100% !important;
+        height: auto;
+        flex-direction: row;
+        margin: 5px 0;
+        overflow: hidden;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card {
+        width: 80px;
+        max-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 5px;
+        position: relative;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-second,
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first>.leaders-card-details {
+        margin-right: 5px;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first>.leaders-card-details>.leaders-card-details-name {
+        font-size: 0.6rem;
+        font-weight: 600;
+        margin-right: 5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 40px;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first>.leaders-card-details>.leaders-card-details-college {
+        font-size: 0.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 60px;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-first>.leaders-card-badge>img {
+        max-width: 20px;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-second {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        font-size: 0.5rem;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-second>.points {
+        background-color: violet;
+        border-radius: 5px;
+        padding: 5px;
+        color: #000;
+        width: 100%;
+        font-weight: 600;
+        margin-right: 0;
+        margin-top: 5px;
+    }
+    .leaderboard-main>.leaderboard-leaders>.leader-card>.leaders-card-second>.referals {
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        padding: 5px;
+        color: #000;
+        min-width: 100%;
+        margin-top: 5px;
+        font-weight: 600;
+    }
+    .leaderboard-main>.leaders-list {
+        width: 100%;
+        overflow: auto;
+        margin: 10px;
+        height: 300px;
+        border: 0.1px solid rgba(255, 255, 255, 0.267);
+        border-radius: 10px;
+    }
+    .leaderboard-main>.leaders-list>table {
+        width: 100%;
+        overflow: auto;
+        font-size: 0.8rem;
+    }
+    .leaderboard-main>.leaders-list>table>thead {
+        width: 100%;
+        color: white;
+        border-radius: 10px;
+        background-color: rgb(96, 0, 96);
+        position: sticky;
+        top: 0;
+    }
+    .leaderboard-main>.leaders-list>table>thead>tr>th {
+        padding: 10px;
+    }
+    .leaderboard-main>.leaders-list>table>thead>tr>th:first-child {
+        width: 50px;
+    }
+    .leaderboard-main>.leaders-list>table>tbody {
+        width: 100%;
+        color: white;
+    }
+    .leaderboard-main>.leaders-list>table>tbody>tr>td {
+        border: 0.1px solid rgba(255, 255, 255, 0.267);
+        padding: 10px;
+    }
+}

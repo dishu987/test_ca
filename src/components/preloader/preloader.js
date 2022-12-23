@@ -3,7 +3,7 @@ const PreLoader = (props) => {
   return (
     <>
       <div className="main-loader">
-        <div class="spinner">
+        <div className="spinner">
           <div></div>
           <div></div>
           <div></div>
