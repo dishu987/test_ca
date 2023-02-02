@@ -73,6 +73,20 @@ const Profile = (props) => {
       });
     // console.log(res);
   };
+  async function setData(data) {
+    await setName(data.name);
+    await setCollege(data.collegeName);
+    await setDOB(data.dob);
+    await setGender(data.gender);
+    await setPhone(data.phone);
+    await setState(data.collegeState);
+    await setYearOfPassing(data.YearOfPassing);
+    await setRefferal(data.referral_code);
+    await setPoints(data.points);
+    await setInvites(data.invites);
+    await setRank(data.rank);
+    return;
+  }
   async function handleProfileData() {
     setLoading(true);
     await fetch(`${process.env.REACT_APP_API_ENDPOINT}/profile/getUser`, {
@@ -86,17 +100,8 @@ const Profile = (props) => {
           navigate("/signup-step-2");
           return;
         }
-        setName(data.name);
-        setCollege(data.collegeName);
-        setDOB(data.dob);
-        setGender(data.gender);
-        setPhone(data.phone);
-        setState(data.collegeState);
-        setYearOfPassing(data.YearOfPassing);
-        setRefferal(data.referral_code);
-        setPoints(data.points);
-        setInvites(data.invites);
-        setRank(data.rank);
+        setData(data);
+        return;
       })
       .catch((err) => {
         toast.error("Something went wrong...");
