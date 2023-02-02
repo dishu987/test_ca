@@ -73,9 +73,9 @@ const Profile = (props) => {
       });
     // console.log(res);
   };
-  const handleProfileData = () => {
+  async function handleProfileData() {
     setLoading(true);
-    const res = fetch(`${process.env.REACT_APP_API_ENDPOINT}/profile/getUser`, {
+    await fetch(`${process.env.REACT_APP_API_ENDPOINT}/profile/getUser`, {
       method: "POST",
       headers: { "Content-type": "application/json; charset=UTF-8" },
       body: JSON.stringify({ id: props.email }),
@@ -86,17 +86,17 @@ const Profile = (props) => {
           navigate("/signup-step-2");
           return;
         }
-        setName(data?.name);
-        setCollege(data?.collegeName);
-        setDOB(data?.dob);
-        setGender(data?.gender);
-        setPhone(data?.phone);
-        setState(data?.collegeState);
-        setYearOfPassing(data?.YearOfPassing);
-        setRefferal(data?.referral_code);
-        setPoints(data?.points);
-        setInvites(data?.invites);
-        setRank(data?.rank);
+        setName(data.name);
+        setCollege(data.collegeName);
+        setDOB(data.dob);
+        setGender(data.gender);
+        setPhone(data.phone);
+        setState(data.collegeState);
+        setYearOfPassing(data.YearOfPassing);
+        setRefferal(data.referral_code);
+        setPoints(data.points);
+        setInvites(data.invites);
+        setRank(data.rank);
       })
       .catch((err) => {
         toast.error("Something went wrong...");
@@ -104,7 +104,7 @@ const Profile = (props) => {
         return;
       });
     setLoading(false);
-  };
+  }
   useEffect(() => {
     return handleProfileData;
   }, [props.email]);
