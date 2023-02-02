@@ -1,7 +1,6 @@
 import _CA_GUIDE_DATA from "./DATA/ca-guide";
 import "./css/ca-guide-styles.css";
 const _CA_GUIDE = () => {
-  const data_1 = _CA_GUIDE_DATA[0];
   return (
     <>
       <div className="ca-guide-main">
@@ -19,13 +18,21 @@ const _CA_GUIDE = () => {
             <ul>
               <div className="links">
                 {_CA_GUIDE_DATA[1].links[0].title}:{" "}
-                <a href={_CA_GUIDE_DATA[1].links[0].value} target="_blank">
+                <a
+                  href={_CA_GUIDE_DATA[1].links[0].value}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {_CA_GUIDE_DATA[1].links[0].value}
                 </a>
               </div>
               <div className="links">
                 {_CA_GUIDE_DATA[1].links[1].title}:{" "}
-                <a href={_CA_GUIDE_DATA[1].links[1].value} target="_blank">
+                <a
+                  href={_CA_GUIDE_DATA[1].links[1].value}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {_CA_GUIDE_DATA[1].links[1].value}
                 </a>
               </div>
@@ -74,9 +81,9 @@ const _CA_GUIDE = () => {
           <li>
             <div className="title">For Queries Contact:</div>
             <ul>
-              <li>Bhavya Kumar Makwana - 9416465059</li>
-              <li>Saurabh Kushwaha - 6377080740</li>
-              <li>Dishant - 9992115079</li>
+              <li>Saurabh Kushwaha - +91 9140798230</li>
+              <li>Bhavya Kumar Makwana - +91 9868325252</li>
+              <li>Dishant Kumar - +91 9992115079</li>
             </ul>
           </li>
         </ul>

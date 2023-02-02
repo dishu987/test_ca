@@ -3,7 +3,7 @@ import PreLoader from "../preloader/preloader";
 import "./CSS/login-styles.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import AsyncCreatableSelect from "react-select/async-creatable";
+import AsyncSelect from "react-select/async";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Select from "react-select";
@@ -18,6 +18,7 @@ const options = [
 function LoginForm(props) {
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [not_in_list, set_not_in_list] = useState(false);
   const LoadOptions = (inputValue) => {
     return axios
       .get(
@@ -49,11 +50,11 @@ function LoginForm(props) {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
-    setLoading(true);
+    e.preventDefault();
     if (!props.email) {
       toast.error("Bad Request, Access Denied!");
+      return;
     }
-    e.preventDefault();
     if (
       user.name === "" ||
       user.college === "" ||
@@ -63,34 +64,40 @@ function LoginForm(props) {
       user.phone === "" ||
       user.YearOfPassing === ""
     ) {
-      toast.error("Please fill required fields");
-      setLoading(false);
+      setLoading(true);
+      setTimeout(() => {
+        toast.error("Please fill required fields");
+        setLoading(false);
+      }, 1000);
+      return;
     } else {
-      fetch("http://localhost:5000/profile/addUser", {
+      setLoading(true);
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/profile/addUser`, {
         method: "POST",
         headers: { "Content-type": "application/json; charset=UTF-8" },
         body: JSON.stringify({
-          name: user.name,
-          email: props.email,
-          collegeName: user.college,
-          gender: user.gender,
-          collegeState: user.state,
-          dob: user.dob,
-          phone: user.phone,
-          YearOfPassing: user.YearOfPassing,
-          idCard: "",
+          name: user?.name,
+          email: props?.email,
+          collegeName: user?.college,
+          gender: user?.gender,
+          collegeState: user?.state,
+          dob: user?.dob,
+          phone: user?.phone,
+          YearOfPassing: user?.YearOfPassing,
         }),
       })
         .then((response) => response.json())
         .then((json) => {
+          setLoading(false);
           navigate("/profile");
+        })
+        .catch((err) => {
+          setLoading(false);
+          toast.error(err);
         });
-      setLoading(false);
     }
   };
-  if (loading) {
-    return <PreLoader />;
-  }
+
   const handleSelected = (selectedOption) => {
     setUser({
       ...user,
@@ -106,7 +113,7 @@ function LoginForm(props) {
   };
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Date of Birth
+      DOB
     </Tooltip>
   );
   return (
@@ -114,6 +121,7 @@ function LoginForm(props) {
       <div className="form-container">
         <form className="custom-form" noValidate onSubmit={handleSubmit}>
           <h3>Register-2/2</h3>
+          <input type="text" value={props.email} disabled required />
           <input
             type="text"
             placeholder="Full name"
@@ -123,16 +131,43 @@ function LoginForm(props) {
             onChange={(e) => onInputChange(e)}
             required
           />
-          <AsyncCreatableSelect
-            className="college-select"
-            placeholder="College Name"
-            loadOptions={LoadOptions}
-            onChange={handleSelected}
-            styles={colourStyles}
-            components={{
-              IndicatorSeparator: () => null,
-            }}
-          />
+          {!not_in_list && (
+            <>
+              <AsyncSelect
+                className="college-select"
+                placeholder="College Name"
+                loadOptions={LoadOptions}
+                onChange={handleSelected}
+                styles={colourStyles}
+                components={{
+                  IndicatorSeparator: () => null,
+                }}
+              />
+              <span
+                onClick={() => set_not_in_list(!not_in_list)}
+                style={{
+                  fontSize: "0.8rem",
+                  color: "var(--hell-primary)",
+                  marginLeft: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                College name not found? Click
+              </span>
+            </>
+          )}
+          {not_in_list && (
+            <input
+              type="text"
+              placeholder="Create College Name"
+              id="college"
+              value={user.college}
+              name="college"
+              onChange={(e) => onInputChange(e)}
+              required
+              autoFocus
+            />
+          )}
           <input
             type="text"
             placeholder="College State"
@@ -185,7 +220,16 @@ function LoginForm(props) {
               required
             />
           </OverlayTrigger>
-          <button type="submit"> Finish </button>{" "}
+          <button type="submit">
+            {" "}
+            {(() => {
+              if (loading) {
+                return <div className="spinner"></div>;
+              } else {
+                return <>Finish</>;
+              }
+            })()}
+          </button>{" "}
           <small>
             <Link to={"/profile"}>Have you filled already? Click here!</Link>
           </small>
@@ -212,7 +256,9 @@ const colourStyles = {
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {
       ...styles,
-      backgroundColor: !(isFocused || isSelected) ? "transparent" : "violet",
+      backgroundColor: !(isFocused || isSelected)
+        ? "transparent"
+        : "var(--hell-primary)",
       color: isFocused || isSelected ? "black !important" : "#fff !important",
       fontWeight: "600 !important",
       cursor: isDisabled ? "not-allowed" : "default",

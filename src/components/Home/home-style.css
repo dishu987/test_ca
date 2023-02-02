@@ -22,13 +22,15 @@
     flex-direction: row;
     flex-wrap: wrap;
     height: 100vh;
-    background-image: url("https://getwallpapers.com/wallpaper/full/e/7/3/535426.jpg");
-    /* background-image: url("../../Assets/bg-landing-page.png"); */
+    /* background-image: url("https://getwallpapers.com/wallpaper/full/e/7/3/535426.jpg"); */
+    /* background-image: url("https://wallpapercave.com/wp/wp2216448.jpg"); */
     background-color: transparent;
     /* clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 89%); */
     background-size: cover;
-    background-position: center;
+    background-position: top;
     background-attachment: fixed;
+    overflow: hidden !important;
+    position: relative;
 }
 
 .home-container>.home-content {
@@ -37,12 +39,40 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    /* background: rgba(0, 0, 0, 0.451);
+    /* background: rgba(0, 0, 0, 0.567);
     -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px);
-    border: 1px solid rgba(255, 255, 255, 0.25); */
+    backdrop-filter: blur(0px); */
+    /* border: 0px solid rgba(255, 255, 255, 0.25); */
     border-radius: 16px;
-    height: 70vh;
+    height: 75vh;
+    margin-top: 80px;
+}
+
+.home-container::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(10, 10, 10, 0.275);
+    z-index: -1;
+}
+
+.home-container>video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -999;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-60%);
+    opacity: 0.5;
 }
 
 .home-container>.home-content>.header {
@@ -52,7 +82,7 @@
 .home-container>.home-content>.header>h1 {
     font-family: "Island Moments";
     font-size: 12rem;
-    color: var(--dark-primary);
+    color: var(--hell-primary);
     -webkit-animation: text-focus-in 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
     animation: text-focus-in 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
@@ -68,7 +98,7 @@
 }
 
 .home-container>.home-content>.header>h1::first-letter {
-    color: var(--hell-primary);
+    color: var(--light-primary);
 }
 
 .home-container>.home-content>.registration-btn>a {
@@ -110,7 +140,7 @@
     color: var(--light-primary);
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 1000px) {
     .home-container {
         padding: 10px 50px;
         color: var(--light-primary);
@@ -144,6 +174,12 @@
     }
     .home-container>.home-content>.registration-btn>a {
         padding: 10px 30px;
+    }
+    .home-container>video {
+        transform: scale3d(2.5, 2.5, 2.5);
+        position: absolute;
+        left: 0;
+        top: 0;
     }
 }
 

@@ -25,7 +25,7 @@ figure.snip1390 {
     overflow: hidden;
     margin: 60px 10px;
     width: 90%;
-    color: #000000;
+    color: var(--dark-primary);
     text-align: center;
     font-size: 16px;
     padding: 20px;
@@ -91,10 +91,10 @@ figure.snip1390 blockquote {
     color: var(--light-primary);
     padding: 45px 20px 40px 50px;
     margin-top: 30px;
-    background-color: rgba(238, 0, 255, 0.138);
+    background-color: rgba(255, 255, 255, 0.138);
     border-radius: 16px;
     text-align: left;
-    border: 1px solid rgba(238, 130, 238, 0.211);
+    border: 1px solid rgba(255, 255, 255, 0.211);
     position: relative;
     font-style: italic;
     opacity: 0.8;

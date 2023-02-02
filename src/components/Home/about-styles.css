@@ -10,8 +10,8 @@
     position: relative;
     border: 0.2px solid rgba(238, 130, 130, 0.419);
     background: rgba(0, 218, 247, 0);
-    background: -webkit-linear-gradient( 90deg, rgba(222, 0, 247, 0.185) 0%, rgba(188, 71, 255, 0) 100%);
-    background: linear-gradient( 90deg, rgba(222, 0, 247, 0.111) 0%, rgba(188, 71, 255, 0) 100%);
+    background: -webkit-linear-gradient( 90deg, rgba(247, 124, 0, 0.185) 0%, rgba(255, 154, 71, 0) 100%);
+    background: linear-gradient( 90deg, rgba(247, 74, 0, 0.185) 0%, rgba(255, 154, 71, 0) 100%);
 }
 
 .home-about>.content>p::first-letter {

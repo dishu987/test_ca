@@ -18,35 +18,17 @@ function ForgotPassowrd() {
     if (!email) {
       toast.error("Fill required field first");
     } else {
-      toast.info(
-        "Email sent successfully. Please check promotions or spam folder"
+      await sendPasswordResetEmail(email);
+      toast.success(
+        "Email sent successfully. Please check promotions or spam folder also"
       );
       setLoading(false);
-      await sendPasswordResetEmail(email);
     }
     setLoading(false);
   };
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
       <div className="form-container">
-        {" "}
-        {(() => {
-          if (loading) {
-            return <PreLoader />;
-          }
-        })()}{" "}
         <form className="custom-form" noValidate onSubmit={handleResetPassword}>
           <h3> Forgot Password </h3>{" "}
           <input
@@ -56,7 +38,15 @@ function ForgotPassowrd() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />{" "}
-          <button type="submit"> Send Email </button>{" "}
+          <button type="submit">
+            {(() => {
+              if (loading) {
+                return <div className="spinner"></div>;
+              } else {
+                return <>Send Email</>;
+              }
+            })()}{" "}
+          </button>{" "}
           <small>
             <Link to={"/login"}> Login </Link>{" "}
           </small>{" "}

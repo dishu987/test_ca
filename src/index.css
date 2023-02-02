@@ -5,7 +5,7 @@
 /*Scrollbar   */
 
 ::-webkit-scrollbar {
-    width: 2px;
+    width: 3px;
 }
 
 
@@ -31,19 +31,14 @@
     border-radius: 12px;
 }
 
-html {
-    --section-background-color: linear-gradient( to bottom left, rgba(17, 16, 16, 0.582), rgba(12, 8, 24, 0.904));
-    --image-gradient: linear-gradient( to bottom left, rgba(17, 16, 16, 0.678), rgba(12, 10, 22, 0.863));
-    --imp-text-color: #240392;
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
 body {
-    background-image: linear-gradient( to right top, #008e87, #142029, #150a17, #000000);
+    background-image: linear-gradient( to right top, var(--dark-primary), #1f0900, #170e0a, #000000);
 }
 
 body {
     font-family: "Mulish";
+    background-size: border-box;
 }
 
 

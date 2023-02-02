@@ -5,12 +5,8 @@ import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
 import "./navbar-style.css";
-import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import { ToastContainer, toast } from "react-toastify";
 
 function NavBar(props) {
-  let navigate = useNavigate();
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
   function scrollHandler() {
@@ -26,35 +22,14 @@ function NavBar(props) {
     const position = window.pageYOffset;
     setScrollPosition(position);
   };
-  useEffect(() => {}, [expand]);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const handleLogout = () => {
-    sessionStorage.removeItem("Auth Token");
-    const auth = getAuth();
-    auth.signOut();
-    navigate("/");
-    toast.info("Logout Successfuly");
-    props.setEmail("");
-  };
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
       <Navbar
         expanded={expand}
         fixed="top"
@@ -74,7 +49,7 @@ function NavBar(props) {
                   </small>
                 );
               } else {
-                return <small>Unautharized User</small>;
+                return <small>Guest User</small>;
               }
             })()}
           </Navbar.Brand>
@@ -126,7 +101,9 @@ function NavBar(props) {
                         <Nav.Link
                           onClick={() => {
                             updateExpanded(!expand);
-                            handleLogout();
+                            props.showLogout === 1
+                              ? props.setShowLogout(2)
+                              : props.setShowLogout(1);
                           }}
                         >
                           <span className="material-symbols-outlined">

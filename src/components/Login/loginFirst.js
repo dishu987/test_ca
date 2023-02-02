@@ -59,33 +59,27 @@ function LoginFirst() {
             response._tokenResponse.refreshToken
           );
           setLoading(false);
-          navigate("/signup-step-3");
+          navigate("/signup-step-2");
         })
         .catch((error) => {
           if (error.code === "auth/email-already-in-use") {
             toast.error("Email Already in Use");
-            setLoading(false);
+          } else if (error.code === "auth/weak-password") {
+            toast.warning("Weak Password");
+          } else if (error.code === "auth/invalid-email") {
+            toast.warning("Invalid Email");
+          } else {
+            toast.error(error.code);
           }
+          setLoading(false);
         });
     } else {
-      toast.error("Password 1 and Password 2 does not match");
+      toast.error("Password and Confirm Password don't match");
       setLoading(false);
     }
   };
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
       {(() => {
         if (loading) {
           return <PreLoader />;

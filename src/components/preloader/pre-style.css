@@ -12,6 +12,7 @@
     z-index: 999;
     user-zoom: none;
     flex-direction: column;
+    backdrop-filter: blur(4px);
 }
 
 .main-loader>.loader-text {
@@ -116,24 +117,72 @@
 
 /* --------- */
 
-#preloader {
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Island+Moments&display=swap");
+.loader-main {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 999999;
-    background-color: var(--dark-primary);
-    background-image: url(../../Assets/pre.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-#preloader-none {
-    opacity: 0;
-}
-
-#no-scroll {
-    overflow: hidden;
     height: 100vh;
+    background-color: var(--dark-primary);
+    z-index: 500;
+}
+
+.loader-main>video {
+    height: 100vh;
+    width: auto;
+    transform: scale3d(1, 1.15, 1);
+    animation: loader-main-div 7s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@keyframes loader-main-div {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.loader-main>.loader-head-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-main>.loader-head-main>h1 {
+    font-family: "Island Moments";
+    font-size: 12rem;
+    color: var(--hell-primary);
+    -webkit-animation: text-focus-in 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both, loader-animation-scale 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both, loader-main-div 7s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+    animation: text-focus-in 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both, loader-animation-scale 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both, loader-main-div 7s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+.loader-main>.loader-head-main>h1::first-letter {
+    color: var(--light-primary);
+}
+
+@keyframes loader-animation-scale {
+    from {
+        transform: scale3d(0, 0, 0);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .loader-main>video {
+        transform: scale3d(1, 3.5, 1);
+    }
 }

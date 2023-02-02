@@ -10,25 +10,23 @@ const TestimonialCard = (props) => {
   return (
     <>
       <figure className="snip1390">
-        <img src={props.img} alt="profile-sample3" className="profile" />
         <figcaption>
-          <h2>{props.name}</h2>
-          <h4>{props.college}</h4>
+          <h2> {props.name} </h2> <h4> {props.college} </h4>{" "}
           <blockquote>
-            {props.description.toString().substring(0, Height)}
+            {" "}
+            {props.description.toString().substring(0, Height)}{" "}
             <Link
               to={""}
               onClick={handleMore}
               style={{
                 margin: "0 10px",
-                color: "violet",
               }}
             >
-              {Height === 200 ? "Read More" : "Read Less"}
-            </Link>
-          </blockquote>
-        </figcaption>
-      </figure>
+              {Height === 200 ? "Read More" : "Read Less"}{" "}
+            </Link>{" "}
+          </blockquote>{" "}
+        </figcaption>{" "}
+      </figure>{" "}
     </>
   );
 };

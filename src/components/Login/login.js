@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./CSS/login-styles.css";
 import Google from "./google.svg";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +35,7 @@ function Login() {
         // The signed-in user info.
         // const user = result.user;
         sessionStorage.setItem("Auth Token", token);
-        toast.success("Loggedin  Successfully");
+        toast.success("Logged In  Successfully");
         // ...
       })
       .catch((error) => {
@@ -60,12 +60,14 @@ function Login() {
           navigate("/profile");
         })
         .catch((error) => {
-          if (error.code === "auth/wrong-password") {
-            toast.error("Please check the Password");
+          if (
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/user-not-found"
+          ) {
+            toast.error("Email or Password is wrong");
             setLoading(false);
-          }
-          if (error.code === "auth/user-not-found") {
-            toast.error("Please check the Email");
+          } else {
+            toast.error(error.code);
             setLoading(false);
           }
         });
@@ -73,18 +75,6 @@ function Login() {
   }
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
       <div className="form-container">
         {(() => {
           if (loading) {
@@ -124,7 +114,7 @@ function Login() {
             </Link>
           </div>
           <small>
-            <Link to={"/forgot-password"}>Forgot Passowrd</Link>
+            <Link to={"/forgot-password"}>Forgot Password</Link>
           </small>
           <small>
             Don't have account? <Link to={"/signup"}>SignUp</Link>

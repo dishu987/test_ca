@@ -11,10 +11,18 @@ function Home(props) {
   return (
     <section>
       <div className="home-container">
+        <video
+          playsInline="playsinline"
+          autoPlay="autoplay"
+          muted="muted"
+          loop="loop"
+        >
+          <source src={require("./Video/video-bg.mp4")} type="video/mp4" />
+        </video>
         <div className="home-content">
           <div className="header">
             <h1>
-              <Tilt>Zeitgeist"23</Tilt>
+              <Tilt>Zeitgeist'23</Tilt>
             </h1>
           </div>
           <div className="subheader">

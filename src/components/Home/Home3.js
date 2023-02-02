@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Tilt from "react-parallax-tilt";
 import "./home-style.css";
 // import required modules
 import { EffectCoverflow, Autoplay } from "swiper";
@@ -40,7 +39,7 @@ function Home3() {
     <>
       <div className="home-offers">
         <div className="offers-header">
-          <h1> What We offer ? </h1>{" "}
+          <h1> What We Offer ? </h1>{" "}
         </div>{" "}
         <div className="offers-main">
           <Swiper
@@ -66,23 +65,23 @@ function Home3() {
             {perksData.slice(0).map((data) => (
               <SwiperSlide key={data.id}>
                 <div className="slide-container">
-                  <div className="main-content">
-                    <div className="content-header">
-                      <h1> {data.title} </h1>{" "}
-                    </div>{" "}
-                    {/* <div className="content-text">
-                                          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                          Aut possimus tempore est neque in veritatis enim incidunt
-                                          quod adipisci, accusantium ducimus. Quia assumenda modi
-                                          fuga aspernatur alias eos repellat ea.
-                                        </div> */}{" "}
-                  </div>{" "}
                   <div className="slide-img">
                     <img
                       src={require(`./ca-perks-img/${data.img}`)}
                       alt=""
                       srcSet=""
                     />
+                  </div>{" "}
+                  <div className="main-content">
+                    <div className="content-header">
+                      <h1> {data.title} </h1>{" "}
+                    </div>{" "}
+                    <div className="content-text">
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Aut possimus tempore est neque in veritatis enim incidunt
+                      quod adipisci, accusantium ducimus. Quia assumenda modi
+                      fuga aspernatur alias eos repellat ea.
+                    </div>{" "}
                   </div>{" "}
                 </div>{" "}
               </SwiperSlide>
