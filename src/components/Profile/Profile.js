@@ -28,6 +28,7 @@ const Profile = (props) => {
   const [points, setPoints] = useState(0);
   const [invites, setInvites] = useState(0);
   const [rank, setRank] = useState(1);
+  const [data, setData] = useState();
   const SendVarificationEmail = () => {
     const auth = getAuth();
     try {
@@ -73,20 +74,6 @@ const Profile = (props) => {
       });
     // console.log(res);
   };
-  async function setData(data) {
-    await setName(data.name);
-    await setCollege(data.collegeName);
-    await setDOB(data.dob);
-    await setGender(data.gender);
-    await setPhone(data.phone);
-    await setState(data.collegeState);
-    await setYearOfPassing(data.YearOfPassing);
-    await setRefferal(data.referral_code);
-    await setPoints(data.points);
-    await setInvites(data.invites);
-    await setRank(data.rank);
-    return;
-  }
   async function handleProfileData() {
     setLoading(true);
     await fetch(`${process.env.REACT_APP_API_ENDPOINT}/profile/getUser`, {
@@ -101,7 +88,17 @@ const Profile = (props) => {
           return;
         }
         setData(data);
-        return;
+        setName(data.name);
+        setCollege(data.collegeName);
+        setDOB(data.dob);
+        setGender(data.gender);
+        setPhone(data.phone);
+        setState(data.collegeState);
+        setYearOfPassing(data.YearOfPassing);
+        setRefferal(data.referral_code);
+        setPoints(data.points);
+        setInvites(data.invites);
+        setRank(data.rank);
       })
       .catch((err) => {
         toast.error("Something went wrong...");
@@ -143,30 +140,30 @@ const Profile = (props) => {
               <ul>
                 <li>
                   <span className="id"> Name &emsp; &emsp;&emsp; :</span>{" "}
-                  <span className="value"> {name} </span>{" "}
+                  <span className="value"> {data?.name} </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> Gender &emsp; &emsp;&nbsp; :</span>{" "}
-                  <span className="value"> {gender} </span>{" "}
+                  <span className="value"> {data?.gender} </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> Date of Birth &nbsp; :</span>{" "}
-                  <span className="value"> {dob} </span>{" "}
+                  <span className="value"> {data?.dob} </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> College&emsp;&emsp;&emsp;: </span>{" "}
-                  <span className="value" title={college}>
+                  <span className="value" title={data?.collegeName}>
                     {" "}
-                    <h6>{college} </h6>
+                    <h6>{data?.collegeName} </h6>
                   </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> College State :</span>{" "}
-                  <span className="value"> {state} </span>{" "}
+                  <span className="value"> {data?.collegeState} </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> Passing Year&nbsp; :</span>{" "}
-                  <span className="value"> {YearOfPassing} </span>{" "}
+                  <span className="value"> {data?.YearOfPassing} </span>{" "}
                 </li>{" "}
               </ul>{" "}
             </div>{" "}
@@ -185,7 +182,7 @@ const Profile = (props) => {
                     <input
                       type="number"
                       className={udatingPhone ? "phone  active-edit" : "phone"}
-                      value={phone}
+                      value={data?.phone}
                       onChange={(e) => setPhone(e.target.value)}
                       disabled={!udatingPhone && "disabled"}
                     />{" "}
