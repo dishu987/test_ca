@@ -109,7 +109,7 @@ const Profile = (props) => {
   }
   useEffect(() => {
     return handleProfileData;
-  }, [props.email]);
+  }, []);
   if (loading) {
     return (
       <>
