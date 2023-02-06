@@ -28,7 +28,7 @@ const Profile = (props) => {
   const [points, setPoints] = useState(0);
   const [invites, setInvites] = useState(0);
   const [rank, setRank] = useState(1);
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
   const SendVarificationEmail = () => {
     const auth = getAuth();
     try {
@@ -83,10 +83,10 @@ const Profile = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (!data.name) {
-          navigate("/signup-step-2");
-          return;
-        }
+        // if (!data.name) {
+        //   navigate("/signup-step-2");
+        //   return;
+        // }
         setData(data);
         setName(data.name);
         setCollege(data.collegeName);
