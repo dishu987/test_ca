@@ -2,13 +2,16 @@ import "./css/dialog-styles.css";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 const DialogBox = (props) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const Logout = () => {
     sessionStorage.removeItem("Auth Token");
     const auth = getAuth();
     auth.signOut();
+    dispatch({ type: "GET_PROFILE_ACTION", payload: {} });
     navigate("/");
     // props.setEmail("");
     toast.info("Logout Successfuly");

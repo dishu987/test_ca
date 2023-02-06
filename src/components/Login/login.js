@@ -42,6 +42,7 @@ function Login() {
         toast.error("Something went wrong, Try Again!");
       });
   };
+
   function handleSubmit(e) {
     e.preventDefault();
     if (user.email === "" || user.password === "") {
@@ -57,6 +58,7 @@ function Login() {
           );
           setLoading(false);
           toast.success("Logged in");
+
           navigate("/profile");
         })
         .catch((error) => {
@@ -76,13 +78,14 @@ function Login() {
   return (
     <>
       <div className="form-container">
+        {" "}
         {(() => {
           if (loading) {
             return <PreLoader />;
           }
-        })()}
+        })()}{" "}
         <form className="custom-form" noValidate onSubmit={handleSubmit}>
-          <h3>Login Here</h3>
+          <h3> Login Here </h3>{" "}
           <input
             type="text"
             placeholder="Email"
@@ -90,7 +93,7 @@ function Login() {
             name="email"
             value={user.email}
             onChange={(e) => onInputChange(e)}
-          />
+          />{" "}
           <input
             type="password"
             placeholder="Password"
@@ -98,29 +101,28 @@ function Login() {
             name="password"
             value={user.password}
             onChange={(e) => onInputChange(e)}
-          />
+          />{" "}
           <button typeof="submit" as={Link}>
-            Log In
-          </button>
+            Log In{" "}
+          </button>{" "}
           <div className="seprate-div">
             <div />
-            Or
-            <div />
-          </div>
+            Or <div />
+          </div>{" "}
           <div className="social">
             <Link className="fb" onClick={loginGoogle}>
               <img src={Google} alt="" srcSet="" />
-              <span> Sign In with Google</span>
-            </Link>
-          </div>
+              <span> Sign In with Google </span>{" "}
+            </Link>{" "}
+          </div>{" "}
           <small>
-            <Link to={"/forgot-password"}>Forgot Password</Link>
-          </small>
+            <Link to={"/forgot-password"}> Forgot Password </Link>{" "}
+          </small>{" "}
           <small>
-            Don't have account? <Link to={"/signup"}>SignUp</Link>
-          </small>
-        </form>
-      </div>
+            Don 't have account? <Link to={"/signup"}>SignUp</Link>{" "}
+          </small>{" "}
+        </form>{" "}
+      </div>{" "}
     </>
   );
 }

@@ -10,25 +10,16 @@ import {
   sendEmailVerification,
   updatePhoneNumber,
 } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 const Profile = (props) => {
   let navigate = useNavigate();
+  let profile = useSelector((state) => state.getprofile);
   const [copyText, setCopyText] = useState();
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState();
-  const [college, setCollege] = useState();
-  const [gender, setGender] = useState();
-  const [state, setState] = useState();
-  const [dob, setDOB] = useState();
-  const [phone, setPhone] = useState();
-  const [YearOfPassing, setYearOfPassing] = useState();
-  const [refferal, setRefferal] = useState();
   const [isSent, setIsSent] = useState(false);
   const [udatingPhone, setUpdatingPhone] = useState(false);
-  const [points, setPoints] = useState(0);
-  const [invites, setInvites] = useState(0);
-  const [rank, setRank] = useState(1);
-  const [data, setData] = useState({});
+  const [phone, setPhone] = useState();
   const SendVarificationEmail = () => {
     const auth = getAuth();
     try {
@@ -46,7 +37,7 @@ const Profile = (props) => {
     setCopyText(e.target.value);
   };
   const copyToClipboard = () => {
-    copy(refferal);
+    copy(profile.result.referral_code);
     toast.success(`Copied`);
   };
   const updatePhone = () => {
@@ -75,37 +66,7 @@ const Profile = (props) => {
     // console.log(res);
   };
   async function handleProfileData() {
-    setLoading(true);
-    await fetch(`${process.env.REACT_APP_API_ENDPOINT}/profile/getUser`, {
-      method: "POST",
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-      body: JSON.stringify({ id: props.email }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // if (!data.name) {
-        //   navigate("/signup-step-2");
-        //   return;
-        // }
-        setData(data);
-        setName(data.name);
-        setCollege(data.collegeName);
-        setDOB(data.dob);
-        setGender(data.gender);
-        setPhone(data.phone);
-        setState(data.collegeState);
-        setYearOfPassing(data.YearOfPassing);
-        setRefferal(data.referral_code);
-        setPoints(data.points);
-        setInvites(data.invites);
-        setRank(data.rank);
-      })
-      .catch((err) => {
-        toast.error("Something went wrong...");
-        navigate("/");
-        return;
-      });
-    setLoading(false);
+    console.log(profile);
   }
   useEffect(() => {
     return handleProfileData;
@@ -140,30 +101,33 @@ const Profile = (props) => {
               <ul>
                 <li>
                   <span className="id"> Name &emsp; &emsp;&emsp; :</span>{" "}
-                  <span className="value"> {data?.name} </span>{" "}
+                  <span className="value"> {profile.result.name} </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> Gender &emsp; &emsp;&nbsp; :</span>{" "}
-                  <span className="value"> {data?.gender} </span>{" "}
+                  <span className="value"> {profile.result.gender} </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> Date of Birth &nbsp; :</span>{" "}
-                  <span className="value"> {data?.dob} </span>{" "}
+                  <span className="value"> {profile.result.dob} </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> College&emsp;&emsp;&emsp;: </span>{" "}
-                  <span className="value" title={data?.collegeName}>
+                  <span className="value" title={profile.result.collegeName}>
                     {" "}
-                    <h6>{data?.collegeName} </h6>
+                    <h6>{profile.result.collegeName} </h6>
                   </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> College State :</span>{" "}
-                  <span className="value"> {data?.collegeState} </span>{" "}
+                  <span className="value"> {profile.result.collegeState} </span>{" "}
                 </li>{" "}
                 <li>
                   <span className="id"> Passing Year&nbsp; :</span>{" "}
-                  <span className="value"> {data?.YearOfPassing} </span>{" "}
+                  <span className="value">
+                    {" "}
+                    {profile.result.YearOfPassing}{" "}
+                  </span>{" "}
                 </li>{" "}
               </ul>{" "}
             </div>{" "}
@@ -182,7 +146,7 @@ const Profile = (props) => {
                     <input
                       type="number"
                       className={udatingPhone ? "phone  active-edit" : "phone"}
-                      value={data?.phone}
+                      value={profile.result.phone}
                       onChange={(e) => setPhone(e.target.value)}
                       disabled={!udatingPhone && "disabled"}
                     />{" "}
@@ -369,15 +333,15 @@ const Profile = (props) => {
             <ul>
               <li>
                 <div className="id"> Points &ensp;: </div>{" "}
-                <div className="value"> {points} </div>{" "}
+                <div className="value"> {profile.result.points} </div>{" "}
               </li>{" "}
               <li>
                 <div className="id"> Invites&ensp;: </div>{" "}
-                <div className="value"> {invites} </div>{" "}
+                <div className="value"> {profile.result.invites} </div>{" "}
               </li>{" "}
               <li>
                 <div className="id"> Rank &ensp;&ensp;: </div>{" "}
-                <div className="value"> {rank} </div>{" "}
+                <div className="value"> {profile.result.rank} </div>{" "}
               </li>{" "}
             </ul>{" "}
           </div>{" "}
@@ -389,7 +353,7 @@ const Profile = (props) => {
                 type="text"
                 className="text"
                 onChange={handleCopyText}
-                value={refferal}
+                value={profile.result.referral_code}
                 disabled
               />
             </div>{" "}

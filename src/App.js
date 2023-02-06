@@ -3,12 +3,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,8 +15,9 @@ import { getAuth } from "firebase/auth";
 import ForgotPassowrd from "./components/Login/forgotPassword";
 import Profile_main from "./components/Profile/Profile-main";
 import DialogBox from "./components/Dialog Box/DialogBox";
-import { ToastContainer } from "react-toastify";
-// import _BackgroundMusic from "./components/Music/Music";
+import { ToastContainer, useToast } from "react-toastify";
+import { fetchProfileData } from "./components/auth/requests/getProfileData";
+import { useDispatch } from "react-redux";
 
 function App(props) {
   // const [load, upadateLoad] = useState(true);
@@ -29,17 +25,14 @@ function App(props) {
   const [name, setName] = useState("");
   const [isVarified, setVarified] = useState(false);
   const [showLogout, setShowLogout] = useState(2);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     upadateLoad(false);
-  //   }, 4000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  // const toast = useToast();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
+        fetchProfileData(dispatch, userAuth.email, navigate);
         setEmail(userAuth.email);
         setName(userAuth.displayName);
         setVarified(userAuth.emailVerified);
@@ -51,8 +44,9 @@ function App(props) {
     return unsubscribe;
   }, []);
   return (
-    <Router>
-      {/* <_BackgroundMusic /> */}
+    <>
+      {" "}
+      {/* <_BackgroundMusic /> */}{" "}
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -123,11 +117,7 @@ function App(props) {
         </Routes>{" "}
         <Footer />
       </div>{" "}
-      {/* </>
-          );
-        }
-      })()}{" "} */}
-    </Router>
+    </>
   );
 }
 
