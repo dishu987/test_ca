@@ -11,6 +11,14 @@ const DialogBox = (props) => {
     sessionStorage.removeItem("Auth Token");
     const auth = getAuth();
     auth.signOut();
+    dispatch({
+      type: "GET_LEADERS_ACTION",
+      payload: {},
+    });
+    dispatch({
+      type: "GET_USER_ACTION",
+      payload: { email: "" },
+    });
     dispatch({ type: "GET_PROFILE_ACTION", payload: {} });
     navigate("/");
     // props.setEmail("");

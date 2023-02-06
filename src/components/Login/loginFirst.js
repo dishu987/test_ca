@@ -8,8 +8,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { provider } from "../../firebase-config";
 import PreLoader from "../preloader/preloader";
+import { useDispatch } from "react-redux";
 
 function LoginFirst() {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     email: "",
@@ -30,7 +32,13 @@ function LoginFirst() {
         const token = credential.accessToken;
         // The signed-in user info.
         // const user = result.user;
-        sessionStorage.setItem("Auth Token", token);
+        dispatch({
+          type: "GET_USER_ACTION",
+          payload: {
+            email: result.user,
+            token: token,
+          },
+        });
         toast.success("Account Created Successfully");
         setLoading(false);
         navigate("/signup-step-2");
@@ -54,10 +62,12 @@ function LoginFirst() {
           toast.success("Account Created Successfuly");
           // response.user.sendEmailVerification();
           // authentication.signOut();
-          sessionStorage.setItem(
-            "Auth Token",
-            response._tokenResponse.refreshToken
-          );
+          dispatch({
+            type: "GET_USER_ACTION",
+            payload: {
+              email: user.email,
+            },
+          });
           setLoading(false);
           navigate("/signup-step-2");
         })

@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { fetchLeadersData } from "../auth/requests/getLeadersData";
+import { fetchProfileData } from "../auth/requests/getProfileData";
+import { useDispatch } from "react-redux";
 
 const options = [
   { value: "Male", label: "Male" },
@@ -18,25 +21,26 @@ const options = [
 function LoginForm(props) {
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [not_in_list, set_not_in_list] = useState(false);
-  const LoadOptions = (inputValue) => {
-    return axios
-      .get(
-        `http://universities.hipolabs.com/search?name=${inputValue}&country=india`
-      )
-      .then((response) => {
-        const options = [];
-        response.data.forEach((d) => {
-          options.push({
-            label: d.name,
-            value: d.name,
-            college_name: d["name"] ? d["name"] : "",
-            state: d["state-province"] ? d["state-province"] : "",
-          });
-        });
-        return options;
-      });
-  };
+  const [not_in_list, set_not_in_list] = useState(true);
+  const dispatch = useDispatch();
+  // const LoadOptions = async (inputValue) => {
+  //   return await axios
+  //     .get(
+  //       `http://universities.hipolabs.com/search?name=${inputValue}&country=india`
+  //     )
+  //     .then((response) => {
+  //       const options = [];
+  //       response.data.forEach((d) => {
+  //         options.push({
+  //           label: d.name,
+  //           value: d.name,
+  //           college_name: d["name"] ? d["name"] : "",
+  //           state: d["state-province"] ? d["state-province"] : "",
+  //         });
+  //       });
+  //       return options;
+  //     });
+  // };
   const [user, setUser] = useState({
     name: "",
     college: "",
@@ -49,7 +53,7 @@ function LoginForm(props) {
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!props.email) {
       toast.error("Bad Request, Access Denied!");
@@ -72,7 +76,7 @@ function LoginForm(props) {
       return;
     } else {
       setLoading(true);
-      fetch(`${process.env.REACT_APP_API_ENDPOINT}/profile/addUser`, {
+      await fetch(`${process.env.REACT_APP_API_ENDPOINT}/profile/addUser`, {
         method: "POST",
         headers: { "Content-type": "application/json; charset=UTF-8" },
         body: JSON.stringify({
@@ -89,7 +93,10 @@ function LoginForm(props) {
         .then((response) => response.json())
         .then((json) => {
           setLoading(false);
-          navigate("/profile");
+          fetchLeadersData(dispatch, navigate);
+          fetchProfileData(dispatch, user.email, navigate);
+          toast("Please Wait...");
+          window.location.replace("/profile");
         })
         .catch((err) => {
           setLoading(false);
@@ -131,7 +138,7 @@ function LoginForm(props) {
             onChange={(e) => onInputChange(e)}
             required
           />
-          {!not_in_list && (
+          {/* {!not_in_list && (
             <>
               <AsyncSelect
                 className="college-select"
@@ -155,19 +162,17 @@ function LoginForm(props) {
                 College name not found? Click
               </span>
             </>
-          )}
-          {not_in_list && (
-            <input
-              type="text"
-              placeholder="Create College Name"
-              id="college"
-              value={user.college}
-              name="college"
-              onChange={(e) => onInputChange(e)}
-              required
-              autoFocus
-            />
-          )}
+          )} */}
+          <input
+            type="text"
+            placeholder="College Name"
+            id="college"
+            value={user.college}
+            name="college"
+            onChange={(e) => onInputChange(e)}
+            required
+            autoFocus
+          />
           <input
             type="text"
             placeholder="College State"

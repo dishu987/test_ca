@@ -65,12 +65,6 @@ const Profile = (props) => {
       });
     // console.log(res);
   };
-  async function handleProfileData() {
-    console.log(profile);
-  }
-  useEffect(() => {
-    return handleProfileData;
-  }, []);
   if (loading) {
     return (
       <>

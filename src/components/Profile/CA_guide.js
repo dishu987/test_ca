@@ -81,9 +81,8 @@ const _CA_GUIDE = () => {
           <li>
             <div className="title">For Queries Contact:</div>
             <ul>
-              <li>Saurabh Kushwaha - +91 9140798230</li>
-              <li>Bhavya Kumar Makwana - +91 9868325252</li>
-              <li>Dishant Kumar - +91 9992115079</li>
+              <li>Apurva Pragya(CA head) - 8766275950</li>
+              <li>Bhavya Kumar Makwana - 9868325252</li>
             </ul>
           </li>
         </ul>

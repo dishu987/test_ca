@@ -6,6 +6,10 @@ export async function fetchProfileData(dispatch, email, navigate) {
         })
         .then((response) => response.json())
         .then((data) => {
+            if (data === "not found") {
+                navigate("signup-step-2")
+                return;
+            }
             dispatch({ type: 'GET_PROFILE_ACTION', payload: data });
         })
         .catch((err) => {

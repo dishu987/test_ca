@@ -17,10 +17,11 @@ import Profile_main from "./components/Profile/Profile-main";
 import DialogBox from "./components/Dialog Box/DialogBox";
 import { ToastContainer, useToast } from "react-toastify";
 import { fetchProfileData } from "./components/auth/requests/getProfileData";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLeadersData } from "./components/auth/requests/getLeadersData";
 
 function App(props) {
-  // const [load, upadateLoad] = useState(true);
+  const getUser = useSelector((state) => state.user).result;
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isVarified, setVarified] = useState(false);
@@ -32,7 +33,12 @@ function App(props) {
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
+        fetchLeadersData(dispatch, navigate);
         fetchProfileData(dispatch, userAuth.email, navigate);
+        dispatch({
+          type: "GET_USER_ACTION",
+          payload: { email: userAuth.email },
+        });
         setEmail(userAuth.email);
         setName(userAuth.displayName);
         setVarified(userAuth.emailVerified);
@@ -92,7 +98,7 @@ function App(props) {
             }
           })()}{" "}
           {(() => {
-            if (email) {
+            if (getUser.email) {
               return (
                 <>
                   <Route
@@ -107,6 +113,10 @@ function App(props) {
                       />
                     }
                   />{" "}
+                  <Route
+                    path="/signup-step-2"
+                    element={<LoginForm email={email} />}
+                  />
                 </>
               );
             }
